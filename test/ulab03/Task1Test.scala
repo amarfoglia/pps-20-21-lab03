@@ -3,7 +3,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import u03.Lists._
 import org.junit.jupiter.api.Test
 import u03.Lists.List.Cons
-import ulab03.Task1.{drop, flatMap, map}
+import ulab03.Task1.{drop, filter, flatMap, map}
 
 class Task1Test {
   val lst: Cons[Int] = Cons(10, Cons(20, Cons(30, List.Nil())))
@@ -23,10 +23,16 @@ class Task1Test {
   }
 
   @Test
-  def testMapBaseOnFlatMap(): Unit = {
-    assertEquals(Cons(11,Cons(21,Cons(31, List.Nil()))), map(lst)(_+1))
-    assertEquals(Cons(20,Cons(40,Cons(60, List.Nil()))), map(lst)(_*2))
-    assertEquals(Cons(-10.0, Cons(-20.0, Cons(-30.0, List.Nil()))), map(lst)(_*(-1.0)))
+  def testMapBasedOnFlatMap(): Unit = {
+    assertEquals(Cons(11,Cons(21,Cons(31, List.Nil()))), map(lst)(_ + 1))
+    assertEquals(Cons(20,Cons(40,Cons(60, List.Nil()))), map(lst)(_ * 2))
+    assertEquals(Cons(-10.0, Cons(-20.0, Cons(-30.0, List.Nil()))), map(lst)(_ * (-1.0)))
   }
 
+  @Test
+  def testFilterBasedOnFlatMap(): Unit = {
+    assertEquals(lst, filter(lst)(_>0))
+    assertEquals(Cons(10, Cons(20, List.Nil())), filter(lst)(_ < 30))
+    assertEquals(List.Nil(), filter(lst)(_ < 0))
+  }
 }
