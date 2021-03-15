@@ -17,4 +17,11 @@ object Task1 {
   }
 
   def map[A,B](l: List[A])(mapper: A=>B): List[B] = flatMap(l)(x => Cons(mapper(x), Nil()))
+
+  def filter[A](l1: List[A])(pred: A=>Boolean): List[A] = l1 match {
+    case _  => flatMap(l1)(x => if(pred(x)) Cons(x, Nil()) else Nil())
+//    case Cons(h,t) if (pred(h)) => Cons(h, filter(t)(pred))
+//    case Cons(_,t) => filter(t)(pred)
+//    case Nil() => Nil()
+  }
 }

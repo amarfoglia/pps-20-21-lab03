@@ -23,9 +23,10 @@ class Task1Test {
   }
 
   @Test
-  def testMap(): Unit = {
+  def testMapBaseOnFlatMap(): Unit = {
     assertEquals(Cons(11,Cons(21,Cons(31, List.Nil()))), map(lst)(_+1))
     assertEquals(Cons(20,Cons(40,Cons(60, List.Nil()))), map(lst)(_*2))
-    assertEquals(Cons(-10, Cons(-20, Cons(-30, List.Nil()))), map(lst)(_*-1))
+    assertEquals(Cons(-10.0, Cons(-20.0, Cons(-30.0, List.Nil()))), map(lst)(_*(-1.0)))
   }
+
 }
