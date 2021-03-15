@@ -20,4 +20,9 @@ object Task1 {
 
   def filter[A](l: List[A])(pred: A=>Boolean): List[A] = flatMap(l)(x => if(pred(x)) Cons(x, Nil()) else Nil())
 
+  def max(l: List[Int]): Option[Int] = l match {
+    case Cons(h, t) => Some(Math.max(h, max(t).getOrElse(Int.MinValue)))
+    case Nil()  => None
+  }
+1
 }

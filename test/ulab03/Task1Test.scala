@@ -1,9 +1,9 @@
 package ulab03
-import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.{assertEquals, assertTrue}
 import u03.Lists._
 import org.junit.jupiter.api.Test
 import u03.Lists.List.Cons
-import ulab03.Task1.{drop, filter, flatMap, map}
+import ulab03.Task1.{drop, filter, flatMap, map, max}
 
 class Task1Test {
   val lst: Cons[Int] = Cons(10, Cons(20, Cons(30, List.Nil())))
@@ -34,5 +34,13 @@ class Task1Test {
     assertEquals(lst, filter(lst)(_>0))
     assertEquals(Cons(10, Cons(20, List.Nil())), filter(lst)(_ < 30))
     assertEquals(List.Nil(), filter(lst)(_ < 0))
+  }
+
+  @Test
+  def testMax(): Unit = {
+    assertEquals(Some(30), max(lst))
+    assertEquals(Some(-10), max(map(lst)(_*(-1))))
+    assertEquals(Some(15), max(Cons(5, Cons(15, Cons(10, List.Nil())))))
+    assertTrue(max(List.Nil()).isEmpty)
   }
 }
