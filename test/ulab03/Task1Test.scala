@@ -11,8 +11,8 @@ class Task1Test {
   @Test
   def testDrop(): Unit = {
     assertEquals(Cons(20,Cons(30, List.Nil())), drop(lst ,1))
-    drop(lst ,2)
-    drop(lst ,5)
+    assertEquals(Cons(30, List.Nil()), drop(lst ,2))
+    assertEquals(List.Nil(), drop(lst , 5))
   }
 
   @Test
