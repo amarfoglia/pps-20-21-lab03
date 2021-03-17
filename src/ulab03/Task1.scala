@@ -30,4 +30,10 @@ object Task1 {
     case Teacher(_, course) => Cons(course, Nil())
     case _ => Nil()
   }
+
+  @tailrec
+  def foldLeft[A,B](l: List[A])(acc: B)(operator: (B, A) => B): B = l match {
+    case Cons(h, t) => foldLeft(t)(operator(acc, h))(operator)
+    case Nil() => acc
+  }
 }

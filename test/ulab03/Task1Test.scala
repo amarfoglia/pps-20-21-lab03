@@ -4,7 +4,7 @@ import u03.Lists._
 import org.junit.jupiter.api.Test
 import u02.SumTypes.{Person, Student, Teacher}
 import u03.Lists.List.{Cons, append}
-import ulab03.Task1.{drop, filter, flatMap, peopleToCourses, map, max}
+import ulab03.Task1.{drop, filter, flatMap, foldLeft, map, max, peopleToCourses}
 
 class Task1Test {
   val lst: Cons[Int] = Cons(10, Cons(20, Cons(30, List.Nil())))
@@ -25,22 +25,22 @@ class Task1Test {
 
   @Test
   def testMapBasedOnFlatMap(): Unit = {
-    assertEquals(Cons(11,Cons(21,Cons(31, List.Nil()))), map(lst)(_ + 1))
-    assertEquals(Cons(20,Cons(40,Cons(60, List.Nil()))), map(lst)(_ * 2))
-    assertEquals(Cons(-10.0, Cons(-20.0, Cons(-30.0, List.Nil()))), map(lst)(_ * (-1.0)))
+    assertEquals(Cons(11,Cons(21,Cons(31, List.Nil()))), map(lst)(_+1))
+    assertEquals(Cons(20,Cons(40,Cons(60, List.Nil()))), map(lst)(_*2))
+    assertEquals(Cons(-10.0, Cons(-20.0, Cons(-30.0, List.Nil()))), map(lst)(_*(-1.0)))
   }
 
   @Test
   def testFilterBasedOnFlatMap(): Unit = {
-    assertEquals(lst, filter(lst)(_ > 0))
-    assertEquals(Cons(10, Cons(20, List.Nil())), filter(lst)(_ < 30))
-    assertEquals(List.Nil(), filter(lst)(_ < 0))
+    assertEquals(lst, filter(lst)(_>0))
+    assertEquals(Cons(10, Cons(20, List.Nil())), filter(lst)(_<30))
+    assertEquals(List.Nil(), filter(lst)(_<0))
   }
 
   @Test
   def testMax(): Unit = {
     assertEquals(Some(30), max(lst))
-    assertEquals(Some(-10), max(map(lst)(_ * (-1))))
+    assertEquals(Some(-10), max(map(lst)(_*(-1))))
     assertEquals(Some(15), max(Cons(5, Cons(15, Cons(10, List.Nil()))))) // test max value in the middle
     assertTrue(max(List.Nil()).isEmpty)
   }
@@ -53,5 +53,11 @@ class Task1Test {
     assertEquals(courses, peopleToCourses(append(students, teachers)))
     assertEquals(courses, peopleToCourses(append(teachers, students)))
     assertEquals(List.Nil(), peopleToCourses(students))
+  }
+
+  @Test
+  def testFoldLeft(): Unit = {
+    assertEquals(60, foldLeft(lst)(0)(_+_))
+    assertEquals(-60, foldLeft(lst)(0)(_-_))
   }
 }
