@@ -1,4 +1,5 @@
 package ulab03
+import u02.SumTypes.{Person, Teacher}
 import u03.Lists.List.{Cons, Nil, append}
 import u03.Lists._
 
@@ -22,7 +23,11 @@ object Task1 {
 
   def max(l: List[Int]): Option[Int] = l match {
     case Cons(h, t) => Some(Math.max(h, max(t).getOrElse(Int.MinValue)))
-    case Nil()  => None
+    case Nil() => None
   }
-1
+
+  def peopleToCourses(people: List[Person]): List[String] = flatMap(people) {
+    case Teacher(_, course) => Cons(course, Nil())
+    case _ => Nil()
+  }
 }

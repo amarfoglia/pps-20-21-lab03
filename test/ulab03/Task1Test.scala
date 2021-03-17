@@ -2,8 +2,9 @@ package ulab03
 import org.junit.jupiter.api.Assertions.{assertEquals, assertTrue}
 import u03.Lists._
 import org.junit.jupiter.api.Test
-import u03.Lists.List.Cons
-import ulab03.Task1.{drop, filter, flatMap, map, max}
+import u02.SumTypes.{Person, Student, Teacher}
+import u03.Lists.List.{Cons, append}
+import ulab03.Task1.{drop, filter, flatMap, peopleToCourses, map, max}
 
 class Task1Test {
   val lst: Cons[Int] = Cons(10, Cons(20, Cons(30, List.Nil())))
@@ -31,7 +32,7 @@ class Task1Test {
 
   @Test
   def testFilterBasedOnFlatMap(): Unit = {
-    assertEquals(lst, filter(lst)(_>0))
+    assertEquals(lst, filter(lst)(_ > 0))
     assertEquals(Cons(10, Cons(20, List.Nil())), filter(lst)(_ < 30))
     assertEquals(List.Nil(), filter(lst)(_ < 0))
   }
@@ -39,8 +40,18 @@ class Task1Test {
   @Test
   def testMax(): Unit = {
     assertEquals(Some(30), max(lst))
-    assertEquals(Some(-10), max(map(lst)(_*(-1))))
-    assertEquals(Some(15), max(Cons(5, Cons(15, Cons(10, List.Nil())))))
+    assertEquals(Some(-10), max(map(lst)(_ * (-1))))
+    assertEquals(Some(15), max(Cons(5, Cons(15, Cons(10, List.Nil()))))) // test max value in the middle
     assertTrue(max(List.Nil()).isEmpty)
+  }
+
+  @Test
+  def testPeopleToCourses(): Unit = {
+    val students: List[Person] = Cons(Student("jacob", 1998), Cons(Student("James", 1997), List.Nil()))
+    val teachers: List[Person] = Cons(Teacher("john", "pps"), Cons(Teacher("jake", "pcd"), List.Nil()))
+    val courses = Cons("pps", Cons("pcd", List.Nil()))
+    assertEquals(courses, peopleToCourses(append(students, teachers)))
+    assertEquals(courses, peopleToCourses(append(teachers, students)))
+    assertEquals(List.Nil(), peopleToCourses(students))
   }
 }
