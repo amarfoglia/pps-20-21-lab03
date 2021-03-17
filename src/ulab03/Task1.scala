@@ -36,4 +36,9 @@ object Task1 {
     case Cons(h, t) => foldLeft(t)(operator(acc, h))(operator)
     case Nil() => acc
   }
+
+  def foldRight[A,B](l: List[A])(acc: B)(operator: (A, B) => B): B = l match {
+    case Cons(h, t) => operator(h, foldRight(t)(acc)(operator))
+    case Nil() => acc
+  }
 }
