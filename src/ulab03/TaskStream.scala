@@ -1,7 +1,7 @@
 package ulab03
 
 import u03.Streams.Stream
-import u03.Streams.Stream.{Cons, empty}
+import u03.Streams.Stream.{Cons, empty, iterate}
 
 import scala.annotation.tailrec
 
@@ -13,4 +13,7 @@ object TaskStream {
     case _ if n<1 || stream == empty() => stream
     case (Cons(_, t), n) => drop(t())(n-1)
   }
+
+  def constant[A](elem: A): Stream[A] = iterate(elem)(e => e)
+
 }
