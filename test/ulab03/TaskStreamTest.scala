@@ -16,6 +16,7 @@ class TaskStreamTest {
   def testDrop(): Unit = {
     assertEqualsStreams(Stream.take(Stream.iterate(6)(_+1))(4), drop(s)(6))
     assertEqualsStreams(empty(), drop(s)(STREAM_SIZE))
+    assertEqualsStreams(empty(), drop(s)(STREAM_SIZE+1))
     assertEqualsStreams(s, drop(s)(0))
   }
 

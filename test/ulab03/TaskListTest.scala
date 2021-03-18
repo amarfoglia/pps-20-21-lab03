@@ -62,12 +62,10 @@ class TaskListTest {
   }
 
   @Test
-  def testSimpleFoldRight(): Unit =
-    testFoldRight(foldRight)
+  def testSimpleFoldRight(): Unit = testFoldRight(foldRight)
 
   @Test
-  def testFoldRightViaFoldLeft(): Unit =
-    testFoldRight(foldRightViaFoldLeft)
+  def testFoldRightViaFoldLeft(): Unit = testFoldRight(foldRightViaFoldLeft)
 
   private def testFoldRight[A, B](fold: List[Int] => Int => ((Int, Int) => Int) => Int): Unit = {
     val lst2 = Cons(3, Cons(7, Cons(1, Cons(5, List.Nil ()))))

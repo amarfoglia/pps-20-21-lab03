@@ -14,6 +14,6 @@ object TaskStream {
     case (Cons(_, t), n) => drop(t())(n-1)
   }
 
-  def constant[A](elem: A): Stream[A] = iterate(elem)(e => e)
+  def constant[A](e: A): Stream[A] = iterate(e)(e => e)
 
 }
