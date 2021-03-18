@@ -4,7 +4,7 @@ import u03.Lists._
 import org.junit.jupiter.api.Test
 import u02.SumTypes.{Person, Student, Teacher}
 import u03.Lists.List.{Cons, append}
-import ulab03.TaskList.{drop, filter, flatMap, foldLeft, foldRight, map, max, peopleToCourses}
+import ulab03.TaskList.{drop, filter, flatMap, foldLeft, foldRight, foldRightViaFoldLeft, map, max, peopleToCourses}
 
 class TaskListTest {
   val lst: List[Int] = Cons(10, Cons(20, Cons(30, List.Nil())))
@@ -62,10 +62,17 @@ class TaskListTest {
   }
 
   @Test
-  def testFoldRight(): Unit = {
+  def testSimpleFoldRight(): Unit =
+    testFoldRight(foldRight)
+
+  @Test
+  def testFoldRightViaFoldLeft(): Unit =
+    testFoldRight(foldRightViaFoldLeft)
+
+  private def testFoldRight[A, B](fold: List[Int] => Int => ((Int, Int) => Int) => Int): Unit = {
     val lst2 = Cons(3, Cons(7, Cons(1, Cons(5, List.Nil ()))))
-    assertEquals(-8, foldRight(lst2) (0) (_ - _))
-    assertEquals(60, foldRight(lst)(0)(_+_))
-    assertEquals(20, foldRight(lst)(0)(_-_))
+    assertEquals(-8, fold(lst2)(0)(_-_))
+    assertEquals(60, fold(lst)(0)(_+_))
+    assertEquals(20, fold(lst)(0)(_-_))
   }
 }

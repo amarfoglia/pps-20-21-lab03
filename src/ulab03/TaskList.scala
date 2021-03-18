@@ -32,13 +32,21 @@ object TaskList {
   }
 
   @tailrec
-  def foldLeft[A,B](l: List[A])(acc: B)(operator: (B, A) => B): B = l match {
-    case Cons(h, t) => foldLeft(t)(operator(acc, h))(operator)
+  def foldLeft[A,B](l: List[A])(acc: B)(op: (B, A) => B): B = l match {
+    case Cons(h, t) => foldLeft(t)(op(acc, h))(op)
     case Nil() => acc
   }
 
-  def foldRight[A,B](l: List[A])(acc: B)(operator: (A, B) => B): B = l match {
-    case Cons(h, t) => operator(h, foldRight(t)(acc)(operator))
+  def foldRight[A,B](l: List[A])(acc: B)(op: (A, B) => B): B = l match {
+    case Cons(h, t) => op(h, foldRight(t)(acc)(op))
     case Nil() => acc
+  }
+
+  def foldRightViaFoldLeft[A,B](l: List[A])(acc: B)(op: (A, B) => B): B =
+    foldLeft(reverse(l))(acc)((a, b) => op(b, a))
+
+  private def reverse[A](l: List[A]): List[A] = l match {
+    case Cons(h, t) => append(reverse(t), Cons(h, Nil()))
+    case _ => l
   }
 }
