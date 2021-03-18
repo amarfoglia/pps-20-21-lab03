@@ -3,7 +3,7 @@ import org.junit.jupiter.api.Assertions.{assertEquals, assertTrue}
 import u03.Lists._
 import org.junit.jupiter.api.Test
 import u02.SumTypes.{Person, Student, Teacher}
-import u03.Lists.List.{Cons, append}
+import u03.Lists.List.{Cons, append, sum}
 import ulab03.TaskList.{drop, filter, flatMap, foldLeft, foldRight, foldRightViaFoldLeft, map, max, peopleToCourses}
 
 class TaskListTest {
@@ -57,8 +57,8 @@ class TaskListTest {
 
   @Test
   def testFoldLeft(): Unit = {
-    assertEquals(60, foldLeft(lst)(0)(_+_))
-    assertEquals(-60, foldLeft(lst)(0)(_-_))
+    assertEquals(sum(lst), foldLeft(lst)(0)(_+_))
+    assertEquals(sum(map(lst)(-_)), foldLeft(lst)(0)(_-_))
   }
 
   @Test
@@ -70,7 +70,7 @@ class TaskListTest {
   private def testFoldRight[A, B](fold: List[Int] => Int => ((Int, Int) => Int) => Int): Unit = {
     val lst2 = Cons(3, Cons(7, Cons(1, Cons(5, List.Nil ()))))
     assertEquals(-8, fold(lst2)(0)(_-_))
-    assertEquals(60, fold(lst)(0)(_+_))
+    assertEquals(sum(lst), fold(lst)(0)(_+_))
     assertEquals(20, fold(lst)(0)(_-_))
   }
 }

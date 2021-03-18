@@ -1,7 +1,7 @@
 package ulab03
 
 import u03.Streams.Stream
-import u03.Streams.Stream.{Cons, empty, iterate}
+import u03.Streams.Stream.{Cons, cons, empty, iterate}
 
 import scala.annotation.tailrec
 
@@ -16,4 +16,8 @@ object TaskStream {
 
   def constant[A](e: A): Stream[A] = iterate(e)(e => e)
 
+  def fib(): Stream[Int] = {
+    def _fib(a: Int)(b: Int):Stream[Int] = cons(a, _fib(b)(a+b))
+    _fib(0)(1)
+  }
 }
