@@ -5,7 +5,7 @@ import u03.Lists._
 
 import scala.annotation.tailrec
 
-object Task1 {
+object TaskList {
   @tailrec
   def drop[A](l: List[A], n: Int): List[A] = l match {
     case _ if n<1 || l == Nil() => l

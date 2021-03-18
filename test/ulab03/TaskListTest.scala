@@ -4,9 +4,9 @@ import u03.Lists._
 import org.junit.jupiter.api.Test
 import u02.SumTypes.{Person, Student, Teacher}
 import u03.Lists.List.{Cons, append}
-import ulab03.Task1.{drop, filter, flatMap, foldLeft, foldRight, map, max, peopleToCourses}
+import ulab03.TaskList.{drop, filter, flatMap, foldLeft, foldRight, map, max, peopleToCourses}
 
-class Task1Test {
+class TaskListTest {
   val lst: List[Int] = Cons(10, Cons(20, Cons(30, List.Nil())))
 
   @Test
